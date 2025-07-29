@@ -1,0 +1,21 @@
+/***
+
+Free Drinks
+    - Burger more than 500tk: free Coke
+    - Else Coke: 30tk
+*/
+
+let burgerPrice = 300;
+
+if(burgerPrice >500){
+    console.log("free coke");
+}
+else{
+    console.log("coke : 30 tk");
+}
+
+
+git init
+git add README.md
+git commit -m "first commit"
+
