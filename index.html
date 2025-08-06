@@ -1,14 +1,685 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>java-script practice</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Practice Solutions - CSS অনুশীলন সমাধান</title>
+<style>
+/* Universal Reset */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+    }
+
+    .main-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .section-header {
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+    }
+
+    .section {
+        margin-bottom: 60px;
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+    }
+
+    /* ===== SOLUTION 1: NAVIGATION BAR ===== */
+    .navbar {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50px;
+        padding: 15px 30px;
+        margin: 20px 0;
+    }
+
+    .nav-menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        list-style: none;
+    }
+
+    .nav-item {
+        position: relative;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 12px 25px;
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-weight: 500;
+        border-radius: 25px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .nav-link:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-link:hover::before {
+        left: 100%;
+    }
+
+    .nav-link.active {
+        color: #ffffff;
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+    }
+
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        background: #ffffff;
+        border-radius: 50%;
+    }
+
+    /* ===== SOLUTION 2: PRICING CARDS ===== */
+    .pricing-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 30px 0;
+    }
+
+    .pricing-card {
+        border-radius: 20px;
+        padding: 40px 30px;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+    }
+
+    /* Basic Plan - Blue Gradient */
+    .pricing-card.basic {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+    }
+
+    .pricing-card.basic:hover {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Standard Plan - Green Gradient */
+    .pricing-card.standard {
+        background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+        box-shadow: 0 20px 40px rgba(86, 171, 47, 0.3);
+        transform: scale(1.05);
+        z-index: 2;
+    }
+
+    .pricing-card.standard::before {
+        content: 'POPULAR';
+        position: absolute;
+        top: 20px;
+        right: -30px;
+        background: #ff6b6b;
+        color: white;
+        padding: 5px 40px;
+        font-size: 12px;
+        font-weight: bold;
+        transform: rotate(45deg);
+    }
+
+    .pricing-card.standard:hover {
+        background: linear-gradient(135deg, #a8e6cf 0%, #56ab2f 100%);
+        transform: translateY(-15px) scale(1.08);
+        box-shadow: 0 35px 70px rgba(86, 171, 47, 0.4);
+    }
+
+    /* Premium Plan - Purple Gradient */
+    .pricing-card.premium {
+        background: linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
+        box-shadow: 0 20px 40px rgba(142, 68, 173, 0.3);
+    }
+
+    .pricing-card.premium:hover {
+        background: linear-gradient(135deg, #3498db 0%, #8e44ad 100%);
+        transform: translateY(-10px) scale(1.02) rotateY(5deg);
+        box-shadow: 0 30px 60px rgba(142, 68, 173, 0.4);
+    }
+
+    .pricing-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .pricing-card .price {
+        font-size: 3rem;
+        font-weight: 900;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .pricing-card .features {
+        list-style: none;
+        margin-bottom: 30px;
+    }
+
+    .pricing-card .features li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pricing-card .btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .pricing-card .btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+    }
+
+    /* ===== SOLUTION 3: IMAGE GALLERY ===== */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+
+    .gallery-item {
+        position: relative;
+        aspect-ratio: 1;
+        border-radius: 15px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .gallery-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8));
+        transition: all 0.4s ease;
+        z-index: 1;
+    }
+
+    .gallery-item:nth-child(2)::before {
+        background: linear-gradient(45deg, rgba(142, 68, 173, 0.8), rgba(52, 152, 219, 0.8));
+    }
+
+    .gallery-item:nth-child(3)::before {
+        background: linear-gradient(45deg, rgba(86, 171, 47, 0.8), rgba(168, 230, 207, 0.8));
+    }
+
+    .gallery-item:nth-child(4)::before {
+        background: linear-gradient(45deg, rgba(241, 196, 15, 0.8), rgba(230, 126, 34, 0.8));
+    }
+
+    .gallery-item:nth-child(5)::before {
+        background: linear-gradient(45deg, rgba(231, 76, 60, 0.8), rgba(192, 57, 43, 0.8));
+    }
+
+    .gallery-item:nth-child(6)::before {
+        background: linear-gradient(45deg, rgba(155, 89, 182, 0.8), rgba(142, 68, 173, 0.8));
+    }
+
+    .gallery-item:hover::before {
+        background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery-content {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        color: white;
+        z-index: 2;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.4s ease;
+    }
+
+    .gallery-item:hover .gallery-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .gallery-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
+    .gallery-content p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    /* Background Images for Gallery */
+    .gallery-item:nth-child(1) {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="<http://www.w3.org/2000/svg>" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23667eea"/><rect x="50" y="50" width="300" height="300" fill="%23764ba2" rx="20"/></svg>') center/cover;
+    }
+
+    .gallery-item:nth-child(2) {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="<http://www.w3.org/2000/svg>" viewBox="0 0 400 400"><rect width="400" height="400" fill="%238e44ad"/><circle cx="200" cy="200" r="150" fill="%233498db"/></svg>') center/cover;
+    }
+
+    .gallery-item:nth-child(3) {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="<http://www.w3.org/2000/svg>" viewBox="0 0 400 400"><rect width="400" height="400" fill="%2356ab2f"/><polygon points="200,50 350,350 50,350" fill="%23a8e6cf"/></svg>') center/cover;
+    }
+
+    .gallery-item:nth-child(4) {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="<http://www.w3.org/2000/svg>" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23f1c40f"/><rect x="100" y="100" width="200" height="200" fill="%23e67e22" rx="100"/></svg>') center/cover;
+    }
+
+    .gallery-item:nth-child(5) {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="<http://www.w3.org/2000/svg>" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23e74c3c"/><path d="M200 50 L350 200 L200 350 L50 200 Z" fill="%23c0392b"/></svg>') center/cover;
+    }
+
+    .gallery-item:nth-child(6) {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="<http://www.w3.org/2000/svg>" viewBox="0 0 400 400"><rect width="400" height="400" fill="%239b59b6"/><ellipse cx="200" cy="200" rx="150" ry="100" fill="%238e44ad"/></svg>') center/cover;
+    }
+
+    /* ===== SOLUTION 4: E-COMMERCE PRODUCT CARDS ===== */
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin: 30px 0;
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-image {
+        position: relative;
+        height: 250px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .product-image::before {
+        content: '';
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transition: all 0.4s ease;
+    }
+
+    .product-card:hover .product-image::before {
+        transform: scale(3);
+    }
+
+    .product-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(238, 90, 82, 0.3);
+    }
+
+    .product-info {
+        padding: 25px;
+    }
+
+    .product-title {
+        color: #2c3e50;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .product-description {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .product-price {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .price-current {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #27ae60;
+    }
+
+    .price-old {
+        font-size: 1.2rem;
+        color: #bdc3c7;
+        text-decoration: line-through;
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-primary {
+        flex: 1;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #2980b9, #3498db);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    }
+
+    .btn-secondary {
+        background: rgba(52, 152, 219, 0.1);
+        color: #3498db;
+        border: 2px solid #3498db;
+        padding: 10px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background: #3498db;
+        color: white;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .nav-menu {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pricing-container {
+            grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .products-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Accessibility Focus States */
+    .nav-link:focus,
+    .pricing-card .btn:focus,
+    .btn-primary:focus,
+    .btn-secondary:focus {
+        outline: 3px solid #f39c12;
+        outline-offset: 2px;
+    }
+</style>
+
+​
 </head>
 <body>
-    <h1>JAVA-SCRIPT-PRACTICE TASKS</h1>
-    
+<div class="main-container">
+<div class="section-header">
+<h1>CSS Practice Solutions</h1>
+<p>CSS অনুশীলন সমাধান - Colors & Backgrounds</p>
+</div>
+    <!-- Solution 1: Navigation Bar -->
+    <div class="section">
+        <h2>সমাধান ১: Navigation Bar (নেভিগেশন বার)</h2>
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Solution 2: Pricing Cards -->
+    <div class="section">
+        <h2>সমাধান ২: Pricing Cards (প্রাইসিং কার্ড)</h2>
+        <div class="pricing-container">
+            <div class="pricing-card basic">
+                <h3>Basic Plan</h3>
+                <div class="price">$19<span style="font-size: 1rem;">/month</span></div>
+                <ul class="features">
+                    <li>5 Projects</li>
+                    <li>10GB Storage</li>
+                    <li>Email Support</li>
+                    <li>Basic Features</li>
+                </ul>
+                <button class="btn">Choose Plan</button>
+            </div>
+
+            <div class="pricing-card standard">
+                <h3>Standard Plan</h3>
+                <div class="price">$49<span style="font-size: 1rem;">/month</span></div>
+                <ul class="features">
+                    <li>25 Projects</li>
+                    <li>100GB Storage</li>
+                    <li>Priority Support</li>
+                    <li>Advanced Features</li>
+                </ul>
+                <button class="btn">Choose Plan</button>
+            </div>
+
+            <div class="pricing-card premium">
+                <h3>Premium Plan</h3>
+                <div class="price">$99<span style="font-size: 1rem;">/month</span></div>
+                <ul class="features">
+                    <li>Unlimited Projects</li>
+                    <li>1TB Storage</li>
+                    <li>24/7 Support</li>
+                    <li>All Features</li>
+                </ul>
+                <button class="btn">Choose Plan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solution 3: Image Gallery -->
+    <div class="section">
+        <h2>সমাধান ৩: Image Gallery (ইমেজ গ্যালারি)</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <h3>Abstract Art</h3>
+                    <p>Beautiful geometric design</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <h3>Circle Design</h3>
+                    <p>Modern circular pattern</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <h3>Triangle Art</h3>
+                    <p>Sharp geometric shapes</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <h3>Round Square</h3>
+                    <p>Soft rounded corners</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <h3>Diamond Shape</h3>
+                    <p>Elegant diamond pattern</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <h3>Oval Design</h3>
+                    <p>Smooth oval shapes</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solution 4: E-commerce Product Cards -->
+    <div class="section">
+        <h2>সমাধান ৪: E-commerce Product Cards (ই-কমার্স প্রোডাক্ট কার্ড)</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">Sale</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Premium Headphones</h3>
+                    <p class="product-description">High-quality wireless headphones with noise cancellation and premium sound quality.</p>
+                    <div class="product-price">
+                        <span class="price-current">$79.99</span>
+                        <span class="price-old">$99.99</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-primary">Add to Cart</button>
+                        <button class="btn-secondary">♡</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);">
+                    <div class="product-badge">New</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Smart Watch</h3>
+                    <p class="product-description">Latest smartwatch with health tracking, GPS, and long-lasting battery life.</p>
+                    <div class="product-price">
+                        <span class="price-current">$199.99</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-primary">Add to Cart</button>
+                        <button class="btn-secondary">♡</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);">
+                    <div class="product-badge" style="background: linear-gradient(135deg, #f39c12, #e67e22);">Hot</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Wireless Speaker</h3>
+                    <p class="product-description">Portable bluetooth speaker with 360-degree sound and waterproof design.</p>
+                    <div class="product-price">
+                        <span class="price-current">$59.99</span>
+                        <span class="price-old">$79.99</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-primary">Add to Cart</button>
+                        <button class="btn-secondary">♡</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+​
 </body>
 </html>
-
 
